@@ -22,15 +22,11 @@ export class UsersGuard implements CanActivate {
             if(bearer !== 'Bearer' || !token) {
                 throw new UnauthorizedException({message: 'Пользователь не авторизован'});
             }
-            console.log(this.jwtService.verify(token));
             
             const user = this.jwtService.verify(token);
             request.user = user;
-            console.log(user);
             
             if(request.user.id !== Number(request.params.userId)) {
-                console.log("request.user.id: ", request.user.id);
-                console.log("Number: ", Number(request.params.userId));
                 throw new HttpException('Пользователь не имеет право на это действие', HttpStatus.FORBIDDEN);
             }
             return true; 

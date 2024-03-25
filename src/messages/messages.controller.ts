@@ -39,7 +39,6 @@ export class MessagesController {
     @Put(':id')
     @UsePipes(new ValidationPipe())
     updateMessage(@Param('id')messageId: string, @Param('columnId') columnId: string, @Param('cardId') cardId: string, @Param('userId') userId: string, @Body() updateMessageDto: UpdateMessageDto) {
-        console.log("work");
         return this.messagesService.updateMessage(+messageId, +cardId, +columnId, +userId, updateMessageDto);
     } 
 
